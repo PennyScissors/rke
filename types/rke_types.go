@@ -903,6 +903,8 @@ type MonitoringConfig struct {
 	UpdateStrategy *DeploymentStrategy `yaml:"update_strategy" json:"updateStrategy,omitempty"`
 	// Number of monitoring addon pods
 	Replicas *int32 `yaml:"replicas" json:"replicas,omitempty" norman:"default=1"`
+	// Priority class name
+	PriorityClassName string `yaml:"priority_class_name" json:"priorityClassName,omitempty" norman:"default=system-cluster-critical"`
 	// Tolerations for Deployments
 	Tolerations []v1.Toleration `yaml:"tolerations" json:"tolerations,omitempty"`
 }

@@ -82,6 +82,7 @@ type MetricsServerOptions struct {
 	Version            string
 	UpdateStrategy     *appsv1.DeploymentStrategy
 	Replicas           *int32
+	PriorityClassName  string
 	Tolerations        []v1.Toleration
 }
 
@@ -422,8 +423,9 @@ func (c *Cluster) deployMetricServer(ctx context.Context, data map[string]interf
 			Type:          c.Monitoring.UpdateStrategy.Strategy,
 			RollingUpdate: c.Monitoring.UpdateStrategy.RollingUpdate,
 		},
-		Replicas:    c.Monitoring.Replicas,
-		Tolerations: c.Monitoring.Tolerations,
+		Replicas:          c.Monitoring.Replicas,
+		PriorityClassName: c.Monitoring.PriorityClassName,
+		Tolerations:       c.Monitoring.Tolerations,
 	}
 	tmplt, err := templates.GetVersionedTemplates(kdm.MetricsServer, data, c.Version)
 	if err != nil {
