@@ -393,6 +393,22 @@ type NetworkConfig struct {
 	UpdateStrategy *DaemonSetUpdateStrategy `yaml:"update_strategy" json:"updateStrategy,omitempty"`
 	// Tolerations for Deployments
 	Tolerations []v1.Toleration `yaml:"tolerations" json:"tolerations,omitempty"`
+	// Priority class name for Flannel's "kube-flannel" daemonset
+	KubeFlannelPriorityClassName string `yaml:"kube_flannel_priority_class_name" json:"kubeFlannelPriorityClassName,omitempty"`
+	// Priority class name for Calico's "calico-node" daemonset
+	CalicoNodePriorityClassName string `yaml:"calico_node_priority_class_name" json:"calicoNodePriorityClassName,omitempty"`
+	// Priority class name for either Canal's or Calico's "calico-kube-controller" deployment
+	CalicoKubeControllersPriorityClassName string `yaml:"calico_kube_controllers_priority_class_name" json:"calicoKubeControllersPriorityClassName,omitempty"`
+	// Priority class name for Canal's "canal" daemonset
+	CanalPriorityClassName string `yaml:"canal_priority_class_name" json:"canalPriorityClassName,omitempty"`
+	// Priority class name for Weave's "weave-net" daemonset
+	WeaveNetPriorityClassName string `yaml:"weave_net_priority_class_name" json:"weaveNetPriorityClassName,omitempty"`
+	// Priority class name for ACI's "aci-containers-host" daemonset
+	AciContainersHostPriorityClassName string `yaml:"aci_containers_host_priority_class_name" json:"aciContainersHostPriorityClassName,omitempty"`
+	// Priority class name for ACI's "aci-containers-openvswitch" daemonset
+	AciContainersOpenvswitchPriorityClassName string `yaml:"aci_containers_openvswitch_priority_class_name" json:"aciContainersOpenvswitchPriorityClassName,omitempty"`
+	// Priority class name for ACI's "aci-containers-controller" deployment
+	AciContainersControllerPriorityClassName string `yaml:"aci_containers_controller_priority_class_name" json:"aciContainersControllerPriorityClassName,omitempty"`
 }
 
 type AuthWebhookConfig struct {
@@ -447,6 +463,10 @@ type IngressConfig struct {
 	Tolerations []v1.Toleration `yaml:"tolerations" json:"tolerations,omitempty"`
 	// Enable or disable nginx default-http-backend
 	DefaultBackend *bool `yaml:"default_backend" json:"defaultBackend,omitempty" norman:"default=true"`
+	// Priority class name for Ingress's "nginx-ingress-controller" daemonset
+	NginxIngressControllerPriorityClassName string `yaml:"nginx_ingress_controller_priority_class_name" json:"nginxIngressControllerPriorityClassName,omitempty"`
+	// Priority class name for Ingress's "default-http-backend" deployment
+	DefaultHTTPBackendPriorityClassName string `yaml:"default_http_backend_priority_class_name" json:"defaultHttpBackendPriorityClassName,omitempty"`
 }
 
 type ExtraEnv struct {
@@ -905,6 +925,8 @@ type MonitoringConfig struct {
 	Replicas *int32 `yaml:"replicas" json:"replicas,omitempty" norman:"default=1"`
 	// Tolerations for Deployments
 	Tolerations []v1.Toleration `yaml:"tolerations" json:"tolerations,omitempty"`
+	// Priority class name for Metrics-Server's "metrics-server" deployment
+	MetricsServerPriorityClassName string `yaml:"metrics_server_priority_class_name" json:"metricsServerPriorityClassName,omitempty"`
 }
 
 type RestoreConfig struct {
@@ -937,6 +959,16 @@ type DNSConfig struct {
 	LinearAutoscalerParams *LinearAutoscalerParams `yaml:"linear_autoscaler_params" json:"linearAutoscalerParams,omitempty"`
 	// Tolerations for Deployments
 	Tolerations []v1.Toleration `yaml:"tolerations" json:"tolerations,omitempty"`
+	// Priority class name for KubeDNS's "kube-dns" deployment
+	KubeDNSPriorityClassName string `yaml:"kube_dns_priority_class_name" json:"kubeDnsPriorityClassName,omitempty"`
+	// Priority class name for KubeDNS's "kube-dns-autoscaler" deployment
+	KubeDNSAutoscalerPriorityClassName string `yaml:"kube_dns_autoscaler_priority_class_name" json:"kubeDnsAutoscalerPriorityClassName,omitempty"`
+	// Priority class name for CoreDNS's "coredns" deployment
+	CoreDNSPriorityClassName string `yaml:"coredns_priority_class_name" json:"corednsPriorityClassName,omitempty"`
+	// Priority class name for CoreDNS's "coredns-autoscaler" deployment
+	CoreDNSAutoscalerPriorityClassName string `yaml:"coredns_autoscaler_priority_class_name" json:"corednsAutoscalerPriorityClassName,omitempty"`
+	// Priority class name for NodeLocal's "node-local-dns" daemonset
+	NodeLocalDNSPriorityClassName string `yaml:"node_local_priority_class_name" json:"nodeLocalDnsPriorityClassName,omitempty"`
 }
 
 type Nodelocal struct {
