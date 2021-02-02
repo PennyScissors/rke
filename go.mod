@@ -4,6 +4,7 @@ go 1.13
 
 replace (
 	github.com/knative/pkg => github.com/rancher/pkg v0.0.0-20190514055449-b30ab9de040e
+	github.com/rancher/types => github.com/pennyscissors/types v0.0.0-20210202205201-8b5889101b01
 	golang.org/x/sys => golang.org/x/sys v0.0.0-20190830141801-acfa387b8d69
 	k8s.io/client-go => k8s.io/client-go v0.18.0
 )

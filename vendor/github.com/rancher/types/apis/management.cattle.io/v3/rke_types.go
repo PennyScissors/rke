@@ -46,8 +46,6 @@ type RancherKubernetesEngineConfig struct {
 	CloudProvider CloudProvider `yaml:"cloud_provider" json:"cloudProvider,omitempty"`
 	// kubernetes directory path
 	PrefixPath string `yaml:"prefix_path" json:"prefixPath,omitempty"`
-	// kubernetes directory path for windows
-	WindowsPrefixPath string `yaml:"win_prefix_path" json:"winPrefixPath,omitempty"`
 	// Timeout in seconds for status check on addon deployment jobs
 	AddonJobTimeout int `yaml:"addon_job_timeout" json:"addonJobTimeout,omitempty" norman:"default=30"`
 	// Bastion/Jump Host configuration
@@ -365,14 +363,6 @@ type BaseService struct {
 	ExtraBinds []string `yaml:"extra_binds" json:"extraBinds,omitempty"`
 	// this is to provide extra env variable to the docker container running kubernetes service
 	ExtraEnv []string `yaml:"extra_env" json:"extraEnv,omitempty"`
-
-	// Windows nodes only of the same as the above
-	// Extra arguments that are added to the services
-	WindowsExtraArgs map[string]string `yaml:"win_extra_args" json:"winExtraArgs,omitempty"`
-	// Extra binds added to the nodes
-	WindowsExtraBinds []string `yaml:"win_extra_binds" json:"winExtraBinds,omitempty"`
-	// this is to provide extra env variable to the docker container running kubernetes service
-	WindowsExtraEnv []string `yaml:"win_extra_env" json:"winExtraEnv,omitempty"`
 }
 
 type NetworkConfig struct {
@@ -394,8 +384,6 @@ type NetworkConfig struct {
 	NodeSelector map[string]string `yaml:"node_selector" json:"nodeSelector,omitempty"`
 	// Network plugin daemonset upgrade strategy
 	UpdateStrategy *DaemonSetUpdateStrategy `yaml:"update_strategy" json:"updateStrategy,omitempty"`
-	// Tolerations for Deployments
-	Tolerations []v1.Toleration `yaml:"tolerations" json:"tolerations,omitempty"`
 }
 
 type AuthWebhookConfig struct {
@@ -440,14 +428,6 @@ type IngressConfig struct {
 	ExtraVolumeMounts []ExtraVolumeMount `yaml:"extra_volume_mounts" json:"extraVolumeMounts,omitempty" norman:"type=array[json]"`
 	// nginx daemonset upgrade strategy
 	UpdateStrategy *DaemonSetUpdateStrategy `yaml:"update_strategy" json:"updateStrategy,omitempty"`
-	// Http port for ingress controller daemonset
-	HTTPPort int `yaml:"http_port" json:"httpPort,omitempty"`
-	// Https port for ingress controller daemonset
-	HTTPSPort int `yaml:"https_port" json:"httpsPort,omitempty"`
-	// NetworkMode selector for ingress controller pods. Default is HostNetwork
-	NetworkMode string `yaml:"network_mode" json:"networkMode,omitempty"`
-	// Tolerations for Deployments
-	Tolerations []v1.Toleration `yaml:"tolerations" json:"tolerations,omitempty"`
 }
 
 type ExtraEnv struct {
@@ -838,8 +818,6 @@ type MonitoringConfig struct {
 	UpdateStrategy *DeploymentStrategy `yaml:"update_strategy" json:"updateStrategy,omitempty"`
 	// Number of monitoring addon pods
 	Replicas *int32 `yaml:"replicas" json:"replicas,omitempty" norman:"default=1"`
-	// Tolerations for Deployments
-	Tolerations []v1.Toleration `yaml:"tolerations" json:"tolerations,omitempty"`
 }
 
 type RestoreConfig struct {
@@ -856,6 +834,8 @@ type RotateCertificates struct {
 type DNSConfig struct {
 	// DNS provider
 	Provider string `yaml:"provider" json:"provider,omitempty"`
+	// DNS options
+	Options map[string]string `yaml:"options" json:"options,omitempty"`
 	// Upstream nameservers
 	UpstreamNameservers []string `yaml:"upstreamnameservers" json:"upstreamnameservers,omitempty"`
 	// ReverseCIDRs
@@ -870,8 +850,6 @@ type DNSConfig struct {
 	UpdateStrategy *DeploymentStrategy `yaml:"update_strategy" json:"updateStrategy,omitempty"`
 	// Autoscaler fields to determine number of dns replicas
 	LinearAutoscalerParams *LinearAutoscalerParams `yaml:"linear_autoscaler_params" json:"linearAutoscalerParams,omitempty"`
-	// Tolerations for Deployments
-	Tolerations []v1.Toleration `yaml:"tolerations" json:"tolerations,omitempty"`
 }
 
 type Nodelocal struct {

@@ -78,8 +78,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&GroupList{},
 		&GroupMember{},
 		&GroupMemberList{},
-		&SamlToken{},
-		&SamlTokenList{},
 		&Principal{},
 		&PrincipalList{},
 		&User{},
